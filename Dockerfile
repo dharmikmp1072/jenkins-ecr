@@ -1,4 +1,8 @@
-FROM centos:7
+FROM node:18
+WORKDIR /usr/src/app
 
-RUN for user in frank; do useradd $user; echo "1234" | passwd $user --stdin; done
-RUN yum update -y && yum install mysql -y
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+EXPOSE 8080
